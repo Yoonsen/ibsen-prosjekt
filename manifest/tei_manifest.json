@@ -1,0 +1,1769 @@
+{
+  "generated_at_utc": "2026-03-26T08:56:10.912546+00:00",
+  "root": "Ibsen-xml",
+  "checks": {
+    "file_count": 47,
+    "max_subfolder_depth": 1,
+    "all_files_within_one_subfolder_level": true,
+    "files_deeper_than_one_level": []
+  },
+  "entity_resolution_summary": {
+    "files_with_unresolved_general_entities": 15,
+    "total_unresolved_general_entities": 15
+  },
+  "external_dtds": {
+    "http://www.ibsen.uio.no/schema/ibsen-charent.dtd": {
+      "general_entities": [
+        "Ccaron",
+        "Edot",
+        "My",
+        "OElig",
+        "Okvist",
+        "Scaron",
+        "Zcaron",
+        "abreve",
+        "acaron",
+        "acute",
+        "acuteCentre",
+        "alphaacute",
+        "amacr",
+        "an",
+        "apos",
+        "ast",
+        "breve",
+        "brvbar",
+        "bsol",
+        "bue",
+        "bull",
+        "cacute",
+        "caron",
+        "ccaron",
+        "cedil",
+        "circ",
+        "colon",
+        "comma",
+        "commat",
+        "copy",
+        "corrMark",
+        "curren",
+        "cyrilE",
+        "cyrilGHE",
+        "cyrilNo",
+        "cyrilPE",
+        "cyrilel",
+        "cyrilem",
+        "cyrilen",
+        "cyrilhard",
+        "cyrilka",
+        "cyrilsoft",
+        "cyrilve",
+        "cyrilya",
+        "cyrilzhe",
+        "darr",
+        "dash",
+        "dblac",
+        "deg",
+        "die",
+        "divide",
+        "dot",
+        "ecaron",
+        "editor",
+        "editorialDecl",
+        "edot",
+        "eogon",
+        "equals",
+        "ergo",
+        "excl",
+        "finalsigma",
+        "foot",
+        "frac12",
+        "frac13",
+        "frac14",
+        "frac15",
+        "frac16",
+        "frac17",
+        "frac18",
+        "frac23",
+        "frac24",
+        "frac25",
+        "frac27",
+        "frac34",
+        "frac37",
+        "frac38",
+        "frac44",
+        "frac45",
+        "frac57",
+        "frac58",
+        "frac68",
+        "frac78",
+        "funder",
+        "grave",
+        "half",
+        "hellip",
+        "horbar",
+        "hyphen",
+        "icaron",
+        "iexcl",
+        "iota",
+        "iquest",
+        "ksi",
+        "lapo",
+        "laquo",
+        "larr",
+        "lcub",
+        "ldquo",
+        "lowbar",
+        "lpar",
+        "lquo",
+        "lsaquo",
+        "lsquo",
+        "lstrok",
+        "macr",
+        "mark",
+        "mbar",
+        "metDash",
+        "metDecl",
+        "micro",
+        "middot",
+        "my",
+        "nacute",
+        "nbar",
+        "nbsp",
+        "not",
+        "num",
+        "ocaron",
+        "odblac",
+        "oelig",
+        "ogon",
+        "ohm",
+        "okvist",
+        "omacr",
+        "omikron",
+        "ordf",
+        "ordm",
+        "para",
+        "percnt",
+        "period",
+        "plus",
+        "plusmn",
+        "projectDesc-corpus",
+        "projectDesc-grt-ms",
+        "projectDesc-grt-trykk",
+        "projectDesc-ht-corpus",
+        "projectDesc-ht-ms",
+        "projectDesc-ht-trykk",
+        "projectDesc-tekstkilde",
+        "quest",
+        "quot",
+        "rapo",
+        "raquo",
+        "rarr",
+        "rcaron",
+        "rcub",
+        "rdquo",
+        "referenceMark",
+        "reg",
+        "rep",
+        "ring",
+        "rpar",
+        "rquo",
+        "rsaquo",
+        "rsquo",
+        "sacute",
+        "scaron",
+        "scedil",
+        "schwa",
+        "sect",
+        "semi",
+        "shy",
+        "skilling",
+        "sol",
+        "stdVals",
+        "sung",
+        "sup1",
+        "sup2",
+        "sup3",
+        "supn",
+        "tagUsage-TEI",
+        "tcedil",
+        "tilde",
+        "times",
+        "titleColon",
+        "trade",
+        "tu20",
+        "typHyp",
+        "uarr",
+        "ucaron",
+        "udblac",
+        "umacr",
+        "uml",
+        "utilde",
+        "vcaron",
+        "verbar",
+        "zacute",
+        "zcaron",
+        "zdot"
+      ],
+      "parameter_entities": [],
+      "error": null
+    }
+  },
+  "files": [
+    {
+      "file": "Brev/B1844-1871ht.xml",
+      "subfolder": "Brev",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-corpus",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Brev/B1871-1879ht.xml",
+      "subfolder": "Brev",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-corpus",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Brev/B1880-1889ht.xml",
+      "subfolder": "Brev",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-corpus",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Brev/B1890-1905ht.xml",
+      "subfolder": "Brev",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-corpus",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Dikt/BlaDigt8191.xml",
+      "subfolder": "Dikt",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-grt-ms",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Dikt/DiFU.xml",
+      "subfolder": "Dikt",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-grt-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Dikt/Diktht.xml",
+      "subfolder": "Dikt",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-corpus",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/BEht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/BSht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/Brht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/C1ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/C2ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "Ibsen-keys",
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": [
+          "Ibsen-keys"
+        ]
+      }
+    },
+    {
+      "file": "Drama/Duht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/F1ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/F2ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/FHht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/Fjht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/Foht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/G1ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/G2ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "Ibsen-keys",
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": [
+          "Ibsen-keys"
+        ]
+      }
+    },
+    {
+      "file": "Drama/Geht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/H1ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/H2ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/HGht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/Hvht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/JGht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/K1ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/K2ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/KEht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/KGht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/KKht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/LEht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/NVht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/Noht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "Ibsen-keys",
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": [
+          "Ibsen-keys"
+        ]
+      }
+    },
+    {
+      "file": "Drama/O1ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/O2ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/O3ht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/PGht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/RJht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/Roht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/SSht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Drama/Saht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/Svht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "metDecl",
+          "projectDesc-ht-ms",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 7,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/UFht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Drama/Viht.xml",
+      "subfolder": "Drama",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-trykk",
+          "stdVals",
+          "tagUsage-tei2"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 5,
+        "unresolved_general_entities": [
+          "tagUsage-tei2"
+        ]
+      }
+    },
+    {
+      "file": "Sakprosa/P1841-1905ht.xml",
+      "subfolder": "Sakprosa",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [
+          "editor",
+          "editorialDecl",
+          "funder",
+          "projectDesc-ht-corpus",
+          "stdVals",
+          "tagUsage-TEI"
+        ],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 6,
+        "unresolved_general_entities": []
+      }
+    },
+    {
+      "file": "Varia/Varia_1_4.xml",
+      "subfolder": "Varia",
+      "depth_from_root": 1,
+      "has_doctype": true,
+      "local_entity_definitions": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "entity_references": {
+        "general": [],
+        "parameter": [
+          "HIS_entiteter"
+        ]
+      },
+      "external_dtd_urls": [
+        "http://www.ibsen.uio.no/schema/ibsen-charent.dtd"
+      ],
+      "resolution": {
+        "resolved_general_entities_count": 0,
+        "unresolved_general_entities": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "generated_at_utc": "2026-03-26T08:58:01.770233+00:00",
+  "root": "Ibsen-xml",
+  "source_file_count": 47,
+  "snippet_count": 64630,
+  "counts_by_genre": {
+    "Brev": 7988,
+    "Dikt": 18106,
+    "Drama": 37452,
+    "Sakprosa": 765,
+    "Varia": 319
+  },
+  "counts_by_snippet_type": {
+    "line": 18106,
+    "paragraph": 9072,
+    "speech": 37452
+  },
+  "output_file": "exports/tei_snippets.jsonl"
+}

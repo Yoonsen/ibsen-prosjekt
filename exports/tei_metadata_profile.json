@@ -1,0 +1,380 @@
+{
+  "generated_at_utc": "2026-03-31T08:08:05.207517+00:00",
+  "source_file": "exports/tei_snippets.jsonl",
+  "total_snippets": 64630,
+  "genres": {
+    "Brev": {
+      "snippet_count": 7988,
+      "snippet_types": {
+        "paragraph": 7988
+      },
+      "recommended_profile": {
+        "required_top_level_fields": [
+          "doc_id",
+          "genre",
+          "snippet_id",
+          "snippet_type",
+          "source_file",
+          "text",
+          "title"
+        ],
+        "optional_top_level_fields": [],
+        "optional_container_fields": [
+          "div_head",
+          "div_type"
+        ],
+        "optional_drama_context_fields": []
+      },
+      "field_coverage": {
+        "top_level": {
+          "doc_id": {
+            "count": 7988,
+            "coverage": 1.0
+          },
+          "genre": {
+            "count": 7988,
+            "coverage": 1.0
+          },
+          "snippet_id": {
+            "count": 7988,
+            "coverage": 1.0
+          },
+          "snippet_type": {
+            "count": 7988,
+            "coverage": 1.0
+          },
+          "source_file": {
+            "count": 7988,
+            "coverage": 1.0
+          },
+          "text": {
+            "count": 7988,
+            "coverage": 1.0
+          },
+          "title": {
+            "count": 7988,
+            "coverage": 1.0
+          }
+        },
+        "container": {
+          "div_head": {
+            "count": 77,
+            "coverage": 0.0096
+          },
+          "div_type": {
+            "count": 7987,
+            "coverage": 0.9999
+          }
+        },
+        "drama_context": {}
+      }
+    },
+    "Dikt": {
+      "snippet_count": 18106,
+      "snippet_types": {
+        "line": 18106
+      },
+      "recommended_profile": {
+        "required_top_level_fields": [
+          "doc_id",
+          "genre",
+          "snippet_id",
+          "snippet_type",
+          "source_file",
+          "text",
+          "title"
+        ],
+        "optional_top_level_fields": [],
+        "optional_container_fields": [
+          "div_head",
+          "div_type",
+          "div_xml_id"
+        ],
+        "optional_drama_context_fields": []
+      },
+      "field_coverage": {
+        "top_level": {
+          "doc_id": {
+            "count": 18106,
+            "coverage": 1.0
+          },
+          "genre": {
+            "count": 18106,
+            "coverage": 1.0
+          },
+          "snippet_id": {
+            "count": 18106,
+            "coverage": 1.0
+          },
+          "snippet_type": {
+            "count": 18106,
+            "coverage": 1.0
+          },
+          "source_file": {
+            "count": 18106,
+            "coverage": 1.0
+          },
+          "text": {
+            "count": 18106,
+            "coverage": 1.0
+          },
+          "title": {
+            "count": 18106,
+            "coverage": 1.0
+          }
+        },
+        "container": {
+          "div_head": {
+            "count": 16558,
+            "coverage": 0.9145
+          },
+          "div_type": {
+            "count": 18106,
+            "coverage": 1.0
+          },
+          "div_xml_id": {
+            "count": 17586,
+            "coverage": 0.9713
+          }
+        },
+        "drama_context": {}
+      }
+    },
+    "Drama": {
+      "snippet_count": 37452,
+      "snippet_types": {
+        "speech": 37452
+      },
+      "recommended_profile": {
+        "required_top_level_fields": [
+          "doc_id",
+          "genre",
+          "snippet_id",
+          "snippet_type",
+          "source_file",
+          "text",
+          "title"
+        ],
+        "optional_top_level_fields": [
+          "who",
+          "xml_id"
+        ],
+        "optional_container_fields": [
+          "div_head",
+          "div_n",
+          "div_type"
+        ],
+        "optional_drama_context_fields": [
+          "act_head",
+          "act_n",
+          "scene_head",
+          "scene_n"
+        ]
+      },
+      "field_coverage": {
+        "top_level": {
+          "doc_id": {
+            "count": 37452,
+            "coverage": 1.0
+          },
+          "genre": {
+            "count": 37452,
+            "coverage": 1.0
+          },
+          "snippet_id": {
+            "count": 37452,
+            "coverage": 1.0
+          },
+          "snippet_type": {
+            "count": 37452,
+            "coverage": 1.0
+          },
+          "source_file": {
+            "count": 37452,
+            "coverage": 1.0
+          },
+          "text": {
+            "count": 37452,
+            "coverage": 1.0
+          },
+          "title": {
+            "count": 37452,
+            "coverage": 1.0
+          },
+          "who": {
+            "count": 36286,
+            "coverage": 0.9689
+          },
+          "xml_id": {
+            "count": 8,
+            "coverage": 0.0002
+          }
+        },
+        "container": {
+          "div_head": {
+            "count": 33510,
+            "coverage": 0.8947
+          },
+          "div_n": {
+            "count": 33793,
+            "coverage": 0.9023
+          },
+          "div_type": {
+            "count": 33795,
+            "coverage": 0.9024
+          }
+        },
+        "drama_context": {
+          "act_head": {
+            "count": 33369,
+            "coverage": 0.891
+          },
+          "act_n": {
+            "count": 33793,
+            "coverage": 0.9023
+          },
+          "scene_head": {
+            "count": 3972,
+            "coverage": 0.1061
+          },
+          "scene_n": {
+            "count": 4096,
+            "coverage": 0.1094
+          }
+        }
+      }
+    },
+    "Sakprosa": {
+      "snippet_count": 765,
+      "snippet_types": {
+        "paragraph": 765
+      },
+      "recommended_profile": {
+        "required_top_level_fields": [
+          "doc_id",
+          "genre",
+          "snippet_id",
+          "snippet_type",
+          "source_file",
+          "text",
+          "title"
+        ],
+        "optional_top_level_fields": [],
+        "optional_container_fields": [
+          "div_head",
+          "div_n"
+        ],
+        "optional_drama_context_fields": []
+      },
+      "field_coverage": {
+        "top_level": {
+          "doc_id": {
+            "count": 765,
+            "coverage": 1.0
+          },
+          "genre": {
+            "count": 765,
+            "coverage": 1.0
+          },
+          "snippet_id": {
+            "count": 765,
+            "coverage": 1.0
+          },
+          "snippet_type": {
+            "count": 765,
+            "coverage": 1.0
+          },
+          "source_file": {
+            "count": 765,
+            "coverage": 1.0
+          },
+          "text": {
+            "count": 765,
+            "coverage": 1.0
+          },
+          "title": {
+            "count": 765,
+            "coverage": 1.0
+          }
+        },
+        "container": {
+          "div_head": {
+            "count": 586,
+            "coverage": 0.766
+          },
+          "div_n": {
+            "count": 56,
+            "coverage": 0.0732
+          }
+        },
+        "drama_context": {}
+      }
+    },
+    "Varia": {
+      "snippet_count": 319,
+      "snippet_types": {
+        "paragraph": 319
+      },
+      "recommended_profile": {
+        "required_top_level_fields": [
+          "doc_id",
+          "genre",
+          "snippet_id",
+          "snippet_type",
+          "source_file",
+          "text",
+          "title"
+        ],
+        "optional_top_level_fields": [],
+        "optional_container_fields": [
+          "div_head",
+          "div_type"
+        ],
+        "optional_drama_context_fields": []
+      },
+      "field_coverage": {
+        "top_level": {
+          "doc_id": {
+            "count": 319,
+            "coverage": 1.0
+          },
+          "genre": {
+            "count": 319,
+            "coverage": 1.0
+          },
+          "snippet_id": {
+            "count": 319,
+            "coverage": 1.0
+          },
+          "snippet_type": {
+            "count": 319,
+            "coverage": 1.0
+          },
+          "source_file": {
+            "count": 319,
+            "coverage": 1.0
+          },
+          "text": {
+            "count": 319,
+            "coverage": 1.0
+          },
+          "title": {
+            "count": 319,
+            "coverage": 1.0
+          }
+        },
+        "container": {
+          "div_head": {
+            "count": 66,
+            "coverage": 0.2069
+          },
+          "div_type": {
+            "count": 5,
+            "coverage": 0.0157
+          }
+        },
+        "drama_context": {}
+      }
+    }
+  }
+}
