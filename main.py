@@ -227,10 +227,17 @@ def normalize_text(value: str) -> str:
 
 
 def first_text(root: etree._Element, xpath_expr: str) -> str | None:
-    values = root.xpath(xpath_expr, namespaces=TEI_NS)
-    if not values:
+    result = root.xpath(xpath_expr, namespaces=TEI_NS)
+    if result is None:
         return None
-    value = values[0]
+
+    if isinstance(result, list):
+        if not result:
+            return None
+        value = result[0]
+    else:
+        value = result
+
     if isinstance(value, etree._Element):
         txt = "".join(value.itertext())
     else:
