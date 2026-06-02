@@ -13,6 +13,12 @@
 - Start mini-app (Streamlit):
   - `uv run streamlit run app.py`
 
+## Informasjonstetthet (beta)
+
+- Appen har en beta-seksjon for informasjonstetthet (`I(frase)`).
+- Velg dokument(er), sett `n_min/n_max`, terskel `T` og antall toppkandidater.
+- Analysen bruker en lokal n-gram-bakgrunn bygget fra `snippets`-materialet, og returnerer kandidater med hoy `I`-score.
+
 ## Filer som lages
 
 - `manifest/tei_manifest.json`
