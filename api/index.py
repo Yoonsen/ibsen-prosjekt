@@ -8,8 +8,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.info_density import InfoDensityConfig, LocalNgramBackend, analyze_text
 
+import shutil
+
 # Absolutt filsti basert på plasseringen til index.py
-DB_PATH = Path(__file__).parent / "exports" / "tei_snippets.db"
+SOURCE_DB_PATH = Path(__file__).parent / "exports" / "tei_snippets.db"
+DB_PATH = Path("/tmp/tei_snippets.db")
 
 class BackendState:
     backend: LocalNgramBackend | None = None
@@ -18,12 +21,16 @@ state = BackendState()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    if not DB_PATH.exists():
-        print(f"Advarsel: Database {DB_PATH} ble ikke funnet.")
+    if not SOURCE_DB_PATH.exists():
+        print(f"Advarsel: Database {SOURCE_DB_PATH} ble ikke funnet.")
         yield
         return
         
-    conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+    if not DB_PATH.exists():
+        print(f"Kopierer database til /tmp for skrivetilgang...")
+        shutil.copy2(SOURCE_DB_PATH, DB_PATH)
+        
+    conn = sqlite3.connect(DB_PATH)
     try:
         rows = conn.execute("SELECT text FROM snippets WHERE text IS NOT NULL AND text != ''").fetchall()
         texts = [str(row[0]) for row in rows]
