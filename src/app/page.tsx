@@ -10,10 +10,7 @@ export default function Home() {
   const handleAnalyze = async () => {
     setLoading(true);
     try {
-      // Bruker miljøvariabel på Vercel, faller tilbake til localhost lokalt
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      
-      const res = await fetch(`${apiUrl}/api/analyze`, {
+      const res = await fetch(`/api/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

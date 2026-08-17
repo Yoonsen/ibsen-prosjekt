@@ -7,6 +7,16 @@ services:
       - "8000:8000"
     volumes:
       - ./exports:/app/exports
-      # Om du senere skal bruke global_words_v1.db, kan du også montere den her:
-      # - ./global_words_v1.db:/app/global_words_v1.db
     restart: unless-stopped
+
+  frontend:
+    build: 
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    restart: unless-stopped
+    depends_on:
+      - api

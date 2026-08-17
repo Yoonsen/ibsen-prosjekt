@@ -5,11 +5,11 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 
-from info_density import InfoDensityConfig, LocalNgramBackend, analyze_text
+from api.info_density import InfoDensityConfig, LocalNgramBackend, analyze_text
 
-DB_PATH = Path("exports/tei_snippets.db")
+# Absolutt filsti basert på prosjektets rotmappe (ett nivå opp fra api/)
+DB_PATH = Path(__file__).parent.parent / "exports" / "tei_snippets.db"
 
 class BackendState:
     backend: LocalNgramBackend | None = None
@@ -82,7 +82,3 @@ def analyze_endpoint(req: AnalyzeRequest):
         "candidates": candidates,
         "histogram": histogram
     }
-
-# For standalone Docker-container: Server Next.js-frontenden hvis den finnes
-if os.path.exists("static"):
-    app.mount("/", StaticFiles(directory="static", html=True), name="static")
