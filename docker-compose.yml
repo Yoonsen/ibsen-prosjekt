@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./exports:/app/exports
+      # Om du senere skal bruke global_words_v1.db, kan du også montere den her:
+      # - ./global_words_v1.db:/app/global_words_v1.db
+    restart: unless-stopped
