@@ -23,7 +23,7 @@ async def lifespan(app: FastAPI):
         yield
         return
         
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
     try:
         rows = conn.execute("SELECT text FROM snippets WHERE text IS NOT NULL AND text != ''").fetchall()
         texts = [str(row[0]) for row in rows]
