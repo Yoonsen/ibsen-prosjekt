@@ -8,8 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.info_density import InfoDensityConfig, LocalNgramBackend, analyze_text
 
-# Absolutt filsti basert på prosjektets rotmappe (ett nivå opp fra api/)
-DB_PATH = Path(__file__).parent.parent / "exports" / "tei_snippets.db"
+# Absolutt filsti basert på plasseringen til index.py
+DB_PATH = Path(__file__).parent / "exports" / "tei_snippets.db"
 
 class BackendState:
     backend: LocalNgramBackend | None = None

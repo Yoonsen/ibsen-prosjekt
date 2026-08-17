@@ -23,11 +23,21 @@ export default function Home() {
           top_k: 50,
         }),
       });
+      
+      if (!res.ok) {
+        let errorMsg = `Server svarte med status ${res.status}`;
+        try {
+          const errorData = await res.json();
+          errorMsg = errorData.detail || errorMsg;
+        } catch(e) {}
+        throw new Error(errorMsg);
+      }
+      
       const data = await res.json();
       setResults(data.candidates || []);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert("Kunne ikke koble til API-et. Kjører FastAPI?");
+      alert(`Kunne ikke koble til API-et.\nFeilmelding: ${err.message}`);
     } finally {
       setLoading(false);
     }
