@@ -1,9 +1,11 @@
+import os
 from contextlib import asynccontextmanager
 import sqlite3
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from info_density import InfoDensityConfig, LocalNgramBackend, analyze_text
 
@@ -80,3 +82,7 @@ def analyze_endpoint(req: AnalyzeRequest):
         "candidates": candidates,
         "histogram": histogram
     }
+
+# For standalone Docker-container: Server Next.js-frontenden hvis den finnes
+if os.path.exists("static"):
+    app.mount("/", StaticFiles(directory="static", html=True), name="static")

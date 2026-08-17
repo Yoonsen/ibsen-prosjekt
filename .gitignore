@@ -11,5 +11,6 @@ wheels/
 
 # SQLite runtime files
 *.db
+!exports/tei_snippets.db
 *.db-shm
 *.db-wal

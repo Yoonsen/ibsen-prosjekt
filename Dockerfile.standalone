@@ -1,0 +1,24 @@
+# Steg 1: Bygg Next.js frontenden til statiske HTML/JS-filer
+FROM node:20-alpine AS frontend-builder
+WORKDIR /web
+COPY web/package*.json ./
+RUN npm install
+COPY web/ ./
+RUN npm run build
+
+# Steg 2: Bygg Python FastAPI og pakk alt sammen i én boks
+FROM python:3.12-slim
+WORKDIR /app
+
+RUN pip install uv
+
+COPY pyproject.toml uv.lock ./
+RUN uv pip install --system -r pyproject.toml
+COPY api.py info_density.py ./
+COPY exports/ ./exports/
+
+# Kopier den ferdigbygde frontenden (Next.js) fra Steg 1
+COPY --from=frontend-builder /web/out ./static
+
+# Kjør API-et, som nå vil servere databasen og nettsiden i samme port
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
