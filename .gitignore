@@ -10,5 +10,6 @@ wheels/
 .venv
 
 # SQLite runtime files
+*.db
 *.db-shm
 *.db-wal
