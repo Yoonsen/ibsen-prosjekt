@@ -73,17 +73,41 @@ def analyze_endpoint(req: AnalyzeRequest):
     )
     
     scores, histogram = analyze_text(text=req.text, backend=state.backend, config=config)
-    
-    candidates = []
-    for score in scores:
-        candidates.append({
-            "phrase": score.phrase,
-            "n": score.n,
-            "I_score": round(score.info_score, 3),
-            "background_count": score.count_background,
-            "occurrences_in_selection": score.occurrences_in_selection,
-            "sample_sentence": score.sample_sentence,
-        })
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        candidates = []
+        for score in scores:
+            ibsen_match = None
+            if score.count_background > 0:
+                try:
+                    # Clean up phrase for FTS5 (escape double quotes just in case)
+                    safe_phrase = score.phrase.replace('"', '""')
+                    query = f'"{safe_phrase}"'
+                    res = conn.execute(
+                        "SELECT s.source_file, s.text FROM snippets s "
+                        "JOIN snippets_fts f ON s.snippet_id = f.snippet_id "
+                        "WHERE f.text MATCH ? LIMIT 1",
+                        (query,)
+                    ).fetchone()
+                    
+                    if res:
+                        source = res[0].split('/')[-1].replace('.xml', '') if res[0] else "Ukjent kilde"
+                        ibsen_match = f"{source}: {res[1]}"
+                except Exception as e:
+                    print(f"FTS5 feil for phrase '{score.phrase}': {e}")
+                    pass
+
+            candidates.append({
+                "phrase": score.phrase,
+                "n": score.n,
+                "I_score": round(score.info_score, 3),
+                "background_count": score.count_background,
+                "occurrences_in_selection": score.occurrences_in_selection,
+                "sample_sentence": score.sample_sentence,
+                "ibsen_match": ibsen_match,
+            })
+    finally:
+        conn.close()
         
     return {
         "candidates": candidates,

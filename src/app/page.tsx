@@ -9,6 +9,7 @@ type Candidate = {
   background_count: number;
   occurrences_in_selection: number;
   sample_sentence: string;
+  ibsen_match?: string | null;
 };
 
 // Enkel funksjon for å bygge et farge-heat-map basert på I-score
@@ -92,15 +93,26 @@ function TextHighlighter({ text, candidates }: { text: string; candidates: Candi
             {part.text}
             
             {/* Tooltip / Popover */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10 pointer-events-none">
-              <div className="font-bold border-b border-gray-700 pb-1 mb-2 flex justify-between">
-                <span>{c.phrase}</span>
-                <span className="text-blue-300">I-score: {c.I_score.toFixed(1)}</span>
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 p-4 bg-gray-900 text-white text-sm rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10 pointer-events-none">
+              <div className="font-bold border-b border-gray-700 pb-2 mb-3 flex justify-between items-center">
+                <span className="text-base">{c.phrase}</span>
+                <span className="text-blue-300 font-mono bg-gray-800 px-2 py-1 rounded">I-score: {c.I_score.toFixed(1)}</span>
               </div>
-              <div className="text-gray-300 text-xs mb-2 italic">
-                "{c.sample_sentence}"
-              </div>
-              <div className="flex justify-between text-xs text-gray-400">
+              
+              {c.ibsen_match ? (
+                <div className="mb-3 bg-gray-800 rounded p-2 border border-gray-700">
+                  <span className="block text-[10px] text-gray-400 uppercase tracking-wider mb-1 font-semibold">Ibsen match</span>
+                  <div className="text-gray-200 text-xs italic font-serif leading-relaxed">
+                    "{c.ibsen_match}"
+                  </div>
+                </div>
+              ) : (
+                <div className="mb-3 text-gray-400 text-xs italic">
+                  Ingen direkte treff i Ibsen-tekster.
+                </div>
+              )}
+
+              <div className="flex justify-between text-[11px] text-gray-400 mt-2">
                 <span>Lengde: {c.n} ord</span>
                 <span>Frekvens: {c.background_count}</span>
               </div>
