@@ -22,6 +22,8 @@ function getHighlightColor(score: number) {
 }
 
 function TextHighlighter({ text, candidates }: { text: string; candidates: Candidate[] }) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   const parts = useMemo(() => {
     if (!candidates || candidates.length === 0 || !text) return [{ text, highlight: null }];
 
@@ -78,47 +80,66 @@ function TextHighlighter({ text, candidates }: { text: string; candidates: Candi
   }, [text, candidates]);
 
   return (
-    <div className="whitespace-pre-wrap leading-loose font-serif text-lg text-gray-800">
+    <div className="whitespace-pre-wrap leading-loose font-serif text-lg text-gray-800" onClick={() => setActiveIndex(null)}>
       {parts.map((part, idx) => {
         if (!part.highlight) {
           return <span key={idx}>{part.text}</span>;
         }
         
         const c = part.highlight;
+        const isActive = activeIndex === idx;
+
         return (
           <span 
             key={idx} 
-            className={`relative group inline-block border-b-2 cursor-help transition-colors rounded-sm px-0.5 ${getHighlightColor(c.I_score)}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveIndex(isActive ? null : idx);
+            }}
+            className={`relative inline-block border-b-2 cursor-pointer transition-colors rounded-sm px-0.5 ${getHighlightColor(c.I_score)} ${isActive ? 'ring-2 ring-gray-900 z-20' : ''}`}
           >
             {part.text}
             
-            {/* Tooltip / Popover */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 p-4 bg-gray-900 text-white text-sm rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10 pointer-events-none">
-              <div className="font-bold border-b border-gray-700 pb-2 mb-3 flex justify-between items-center">
-                <span className="text-base">{c.phrase}</span>
-                <span className="text-blue-300 font-mono bg-gray-800 px-2 py-1 rounded">I-score: {c.I_score.toFixed(1)}</span>
-              </div>
-              
-              {c.ibsen_match ? (
-                <div className="mb-3 bg-gray-800 rounded p-2 border border-gray-700">
-                  <span className="block text-[10px] text-gray-400 uppercase tracking-wider mb-1 font-semibold">Ibsen match</span>
-                  <div className="text-gray-200 text-xs italic font-serif leading-relaxed">
-                    "{c.ibsen_match}"
+            {/* Clickable Popover */}
+            {isActive && (
+              <div 
+                onClick={(e) => e.stopPropagation()}
+                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-80 md:w-96 p-5 bg-white text-gray-900 text-sm rounded-xl shadow-2xl border border-gray-200 z-30 cursor-auto"
+              >
+                <div className="font-bold border-b border-gray-100 pb-3 mb-4 flex justify-between items-start gap-2">
+                  <span className="text-lg leading-tight">{c.phrase}</span>
+                  <span className="text-blue-700 font-mono bg-blue-50 border border-blue-100 px-2 py-1 rounded shadow-sm shrink-0">I-score: {c.I_score.toFixed(1)}</span>
+                </div>
+                
+                {c.ibsen_match ? (
+                  <div className="mb-4 bg-gray-50 rounded-lg p-3 border border-gray-200 shadow-inner">
+                    <span className="block text-[10px] text-gray-500 uppercase tracking-widest mb-2 font-bold">Ibsen match</span>
+                    <div className="text-gray-800 text-sm italic font-serif leading-relaxed">
+                      "{c.ibsen_match}"
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className="mb-3 text-gray-400 text-xs italic">
-                  Ingen direkte treff i Ibsen-tekster.
-                </div>
-              )}
+                ) : (
+                  <div className="mb-4 bg-gray-50 rounded-lg p-3 border border-gray-100 text-gray-500 text-sm italic">
+                    Ingen direkte treff i Ibsen-tekster.
+                  </div>
+                )}
 
-              <div className="flex justify-between text-[11px] text-gray-400 mt-2">
-                <span>Lengde: {c.n} ord</span>
-                <span>Frekvens: {c.background_count}</span>
+                <div className="flex justify-between items-center text-xs text-gray-500 pt-2 border-t border-gray-100">
+                  <span className="bg-gray-100 px-2 py-1 rounded">Lengde: {c.n} ord</span>
+                  <span className="bg-gray-100 px-2 py-1 rounded">Frekvens: {c.background_count}</span>
+                </div>
+                
+                <button 
+                  onClick={() => setActiveIndex(null)}
+                  className="absolute -top-3 -right-3 bg-white text-gray-400 hover:text-gray-900 border border-gray-200 rounded-full w-8 h-8 flex items-center justify-center shadow-sm transition-colors"
+                  title="Lukk"
+                >
+                  ✕
+                </button>
+                {/* Lille pilen nederst */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white drop-shadow-sm"></div>
               </div>
-              {/* Lille pilen nederst */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-            </div>
+            )}
           </span>
         );
       })}

@@ -79,6 +79,7 @@ def analyze_endpoint(req: AnalyzeRequest):
         for score in scores:
             ibsen_match = None
             if score.count_background > 0:
+                res = None
                 try:
                     # Clean up phrase for FTS5 (escape double quotes just in case)
                     safe_phrase = score.phrase.replace('"', '""')
@@ -89,13 +90,24 @@ def analyze_endpoint(req: AnalyzeRequest):
                         "WHERE f.text MATCH ? LIMIT 1",
                         (query,)
                     ).fetchone()
-                    
-                    if res:
-                        source = res[0].split('/')[-1].replace('.xml', '') if res[0] else "Ukjent kilde"
-                        ibsen_match = f"{source}: {res[1]}"
                 except Exception as e:
                     print(f"FTS5 feil for phrase '{score.phrase}': {e}")
-                    pass
+                    
+                # Robust fallback med LIKE hvis FTS5 (avhengig av Linux-miljø) ikke fant noe
+                # (spesielt for særnorske tegn som ø/æ/å som noen tokenizere sliter med)
+                if not res:
+                    try:
+                        res = conn.execute(
+                            "SELECT source_file, text FROM snippets "
+                            "WHERE text LIKE ? LIMIT 1",
+                            (f"%{score.phrase}%",)
+                        ).fetchone()
+                    except Exception as e:
+                        print(f"LIKE feil for phrase '{score.phrase}': {e}")
+                
+                if res:
+                    source = res[0].split('/')[-1].replace('.xml', '') if res[0] else "Ukjent kilde"
+                    ibsen_match = f"{source}: {res[1]}"
 
             candidates.append({
                 "phrase": score.phrase,
