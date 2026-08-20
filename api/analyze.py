@@ -137,12 +137,32 @@ class AnalyzeSourceRequest(BaseModel):
 import re
 import html
 
+@app.get("/api/source-works")
+def get_source_works():
+    xml_path = Path(__file__).parent.parent / "Ibsen-xml" / "Dikt" / "Diktht.xml"
+    if not xml_path.exists():
+        return {"works": []}
+        
+    text = xml_path.read_text(encoding='utf-8')
+    poems = re.split(r'<div[^>]*type="poem"[^>]*>', text)
+    
+    works = []
+    for p in poems[1:]:
+        m = re.search(r'<head[^>]*>(.*?)</head>', p, re.DOTALL)
+        if m:
+            head_html = m.group(1)
+            title = html.unescape(re.sub(r'<[^>]+>', '', head_html)).strip()
+            if title and title not in works:
+                works.append(title)
+                
+    return {"works": works}
+
 @app.post("/api/analyze-source")
 def analyze_source_endpoint(req: AnalyzeSourceRequest):
     if not state.backend:
         raise HTTPException(status_code=500, detail="Backend er ikke initialisert")
         
-    xml_path = Path("Ibsen-xml/Dikt/Diktht.xml")
+    xml_path = Path(__file__).parent.parent / "Ibsen-xml" / "Dikt" / "Diktht.xml"
     if not xml_path.exists():
         raise HTTPException(status_code=404, detail="XML fil ikke funnet")
         

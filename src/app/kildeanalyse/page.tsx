@@ -109,6 +109,7 @@ export default function Kildeanalyse() {
   const [activeCandidate, setActiveCandidate] = useState<Candidate | null>(null);
 
   const [workId, setWorkId] = useState("Terje Vigen");
+  const [availableWorks, setAvailableWorks] = useState<string[]>([]);
   const [nMin, setNMin] = useState(2);
   const [nMax, setNMax] = useState(6);
   const [threshold, setThreshold] = useState(14.0);
@@ -145,6 +146,12 @@ export default function Kildeanalyse() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetch('/api/source-works').then(res => res.json()).then(data => {
+      setAvailableWorks(data.works || []);
+    });
+  }, []);
 
   // Hent initielt
   useEffect(() => {
@@ -184,7 +191,9 @@ export default function Kildeanalyse() {
             <p className="text-gray-500 mt-2 text-lg">Trekke ut allusjonsverdige fraser fra originalverk for Elastic-søk.</p>
           </div>
           <div className="flex gap-2">
-             <input type="text" value={workId} onChange={e => setWorkId(e.target.value)} className="p-2 border rounded-lg text-sm" placeholder="Søk i XML..." />
+                         <select value={workId} onChange={e => setWorkId(e.target.value)} className="p-2 border rounded-lg text-sm bg-white">
+               {availableWorks.map(w => <option key={w} value={w}>{w}</option>)}
+             </select>
              <button onClick={handleAnalyze} className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-bold">Oppdater</button>
           </div>
         </header>
