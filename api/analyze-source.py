@@ -1,1 +1,1 @@
-from .analyze import app
+from api.analyze import app
