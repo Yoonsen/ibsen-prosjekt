@@ -139,11 +139,13 @@ import html
 
 @app.get("/api/source-works")
 def get_source_works():
-    xml_path = Path(__file__).parent.parent / "Ibsen-xml" / "Dikt" / "Diktht.xml"
-    if not xml_path.exists():
+    try:
+        import urllib.request
+        url = "https://raw.githubusercontent.com/Yoonsen/ibsen-prosjekt/main/Ibsen-xml/Dikt/Diktht.xml"
+        with urllib.request.urlopen(url) as response:
+            text = response.read().decode("utf-8")
+    except Exception as e:
         return {"works": []}
-        
-    text = xml_path.read_text(encoding='utf-8')
     poems = re.split(r'<div[^>]*type="poem"[^>]*>', text)
     
     works = []
@@ -162,11 +164,13 @@ def analyze_source_endpoint(req: AnalyzeSourceRequest):
     if not state.backend:
         raise HTTPException(status_code=500, detail="Backend er ikke initialisert")
         
-    xml_path = Path(__file__).parent.parent / "Ibsen-xml" / "Dikt" / "Diktht.xml"
-    if not xml_path.exists():
-        raise HTTPException(status_code=404, detail="XML fil ikke funnet")
-        
-    text = xml_path.read_text(encoding='utf-8')
+    try:
+        import urllib.request
+        url = "https://raw.githubusercontent.com/Yoonsen/ibsen-prosjekt/main/Ibsen-xml/Dikt/Diktht.xml"
+        with urllib.request.urlopen(url) as response:
+            text = response.read().decode("utf-8")
+    except Exception as e:
+        raise HTTPException(status_code=404, detail="Kunne ikke laste ned XML")
     poems = re.split(r'<div[^>]*type="poem"[^>]*>', text)
     
     terje_poem = None
