@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/**/*.py": {
+    "api/analyze.py": {
       "includeFiles": "Ibsen-xml/**"
     }
   },
