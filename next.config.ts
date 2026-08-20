@@ -10,16 +10,7 @@ const nextConfig: NextConfig = {
         },
       ];
     }
-    return [
-        {
-          source: "/api/analyze-source",
-          destination: "/api/analyze",
-        },
-        {
-          source: "/api/source-works",
-          destination: "/api/analyze",
-        }
-    ];
+    return [];
   },
 };
 
