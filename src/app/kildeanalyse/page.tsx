@@ -108,6 +108,8 @@ export default function Kildeanalyse() {
   const [loading, setLoading] = useState(false);
   const [activeCandidate, setActiveCandidate] = useState<Candidate | null>(null);
 
+  const [debugLogs, setDebugLogs] = useState<string[]>([]);
+  const addLog = (msg: string) => setDebugLogs(prev => [...prev, msg]);
   const [workId, setWorkId] = useState("Terje Vigen");
   const [availableWorks, setAvailableWorks] = useState<string[]>([]);
   const [nMin, setNMin] = useState(2);
@@ -119,6 +121,7 @@ export default function Kildeanalyse() {
   const handleAnalyze = async () => {
     setLoading(true);
     setActiveCandidate(null);
+    addLog(`Starter POST /api/analyze-source for workId: ${workId}...`);
     try {
       const res = await fetch(`/api/analyze-source`, {
         method: "POST",
@@ -132,25 +135,37 @@ export default function Kildeanalyse() {
         }),
       });
       
+      const text = await res.text();
+      addLog(`POST /api/analyze-source -> Status: ${res.status}. Body: ${text.slice(0, 150)}`);
+      
       if (!res.ok) {
         throw new Error(`Status ${res.status}`);
       }
       
-      const data = await res.json();
+      const data = JSON.parse(text);
       setResults(data.candidates || []);
       setPoemText(data.text || "");
+      addLog("Analyse fullført med suksess.");
     } catch (err: any) {
       console.error(err);
-      alert(`Feil ved henting: ${err.message}`);
+      addLog(`Feil i handleAnalyze: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetch('/api/source-works').then(res => res.json()).then(data => {
-      setAvailableWorks(data.works || []);
-    });
+    addLog("Henter /api/source-works...");
+    fetch("/api/source-works").then(async res => {
+      const text = await res.text();
+      addLog(`GET /api/source-works -> Status: ${res.status}. Body: ${text.slice(0, 150)}`);
+      try {
+         const data = JSON.parse(text);
+         setAvailableWorks(data.works || []);
+      } catch (e) {
+         addLog(`Feil ved parsing av /api/source-works: ${e}`);
+      }
+    }).catch(err => addLog(`Nettverksfeil /api/source-works: ${err}`));
   }, []);
 
   // Hent initielt
@@ -198,6 +213,11 @@ export default function Kildeanalyse() {
           </div>
         </header>
 
+        
+        <div className="bg-gray-900 text-green-400 p-4 rounded-xl text-xs font-mono mb-8 overflow-y-auto max-h-48">
+           <h3 className="text-white font-bold mb-2">Diagnostic Logs</h3>
+           {debugLogs.map((l, i) => <div key={i}>{l}</div>)}
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[75vh]">
           {/* Venstre panel: Diktet */}
           <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-200 overflow-y-auto relative">
