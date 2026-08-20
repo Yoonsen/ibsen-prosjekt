@@ -125,3 +125,80 @@ def analyze_endpoint(req: AnalyzeRequest):
         "candidates": candidates,
         "histogram": histogram
     }
+
+
+class AnalyzeSourceRequest(BaseModel):
+    work_id: str = "Terje Vigen"
+    n_min: int = 2
+    n_max: int = 6
+    threshold: float = 14.0
+    top_k: int = 100
+
+import re
+import html
+
+@app.post("/api/analyze-source")
+def analyze_source_endpoint(req: AnalyzeSourceRequest):
+    if not state.backend:
+        raise HTTPException(status_code=500, detail="Backend er ikke initialisert")
+        
+    xml_path = Path("Ibsen-xml/Dikt/Diktht.xml")
+    if not xml_path.exists():
+        raise HTTPException(status_code=404, detail="XML fil ikke funnet")
+        
+    text = xml_path.read_text(encoding='utf-8')
+    poems = re.split(r'<div[^>]*type="poem"[^>]*>', text)
+    
+    terje_poem = None
+    for p in poems:
+        if req.work_id in p[:1000]:
+            terje_poem = p
+            break
+            
+    if not terje_poem:
+        raise HTTPException(status_code=404, detail=f"Diktet {req.work_id} ikke funnet i XML")
+        
+    p = re.sub(r'<pb[^>]*/>', '', terje_poem)
+    p = re.sub(r'<anchor[^>]*/>', '', p)
+    p = re.sub(r'<ptr[^>]*/>', '', p)
+    
+    stanzas = re.findall(r'<HIS:hisLg[^>]*>(.*?)</HIS:hisLg>', p, re.DOTALL)
+    if not stanzas:
+        stanzas = re.findall(r'<lg[^>]*>(.*?)</lg>', p, re.DOTALL)
+        
+    extracted_text_blocks = []
+    for stanza in stanzas:
+        lines = re.findall(r'<l[^>]*>(.*?)</l>', stanza, re.DOTALL)
+        clean_lines = [html.unescape(re.sub(r'<[^>]+>', '', l).strip()) for l in lines]
+        extracted_text_blocks.append("
+".join(clean_lines))
+        
+    full_extracted_text = "
+
+".join(extracted_text_blocks)
+    
+    config = InfoDensityConfig(
+        n_min=req.n_min,
+        n_max=req.n_max,
+        threshold=req.threshold,
+        top_k=req.top_k
+    )
+    
+    scores, histogram = analyze_text(text=full_extracted_text, backend=state.backend, config=config)
+    
+    candidates = []
+    for score in scores:
+        candidates.append({
+            "phrase": score.phrase,
+            "n": score.n,
+            "I_score": round(score.info_score, 3),
+            "background_count": score.count_background,
+            "occurrences_in_selection": score.occurrences_in_selection,
+            "sample_sentence": score.sample_sentence
+        })
+        
+    return {
+        "text": full_extracted_text,
+        "candidates": candidates,
+        "histogram": histogram
+    }
