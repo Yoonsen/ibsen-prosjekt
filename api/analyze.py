@@ -194,9 +194,9 @@ def analyze_source_endpoint(req: AnalyzeSourceRequest):
     for stanza in stanzas:
         lines = re.findall(r'<l[^>]*>(.*?)</l>', stanza, re.DOTALL)
         clean_lines = [html.unescape(re.sub(r'<[^>]+>', '', l).strip()) for l in lines]
-        extracted_text_blocks.append("\\n".join(clean_lines))
+        extracted_text_blocks.append("\n".join(clean_lines))
         
-    full_extracted_text = "\\n\\n".join(extracted_text_blocks)
+    full_extracted_text = "\n\n".join(extracted_text_blocks)
     
     config = InfoDensityConfig(
         n_min=req.n_min,
