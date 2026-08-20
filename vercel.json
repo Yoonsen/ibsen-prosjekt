@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/**/*.py": {
+      "includeFiles": "Ibsen-xml/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/analyze.py"
+    }
+  ]
+}
