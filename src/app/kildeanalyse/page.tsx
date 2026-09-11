@@ -198,7 +198,11 @@ export default function Kildeanalyse() {
 
   const handleElasticSearch = (e: React.MouseEvent, c: Candidate) => {
     e.stopPropagation();
-    alert(`Her bygger vi Elastic-spørringen for Nettbiblioteket:\n\n{ "match_phrase": { "tekst": { "query": "${c.phrase}", "slop": 2 } } }\n\n(Denne vil skyte spørringen til elastic-clusteret senere.)`);
+    // Sender brukeren direkte til Nasjonalbibliotekets globale søk i en ny fane!
+    // Vi setter frasen i hermetegn for eksakt søk.
+    const query = encodeURIComponent(`"${c.phrase}"`);
+    const url = `https://www.nb.no/search?q=${query}&mediatype=bøker`;
+    window.open(url, '_blank');
   };
 
   return (
