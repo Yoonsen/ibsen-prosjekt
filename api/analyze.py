@@ -1,49 +1,16 @@
 import os
-from contextlib import asynccontextmanager
 import sqlite3
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.info_density import InfoDensityConfig, LocalNgramBackend, analyze_text
+# Vercel leser fra exports-mappen direkte. Siden vi ikke lenger bygger
+# minne-krevende N-gram ordbøker eller skriver til databasen, 
+# trenger vi ikke kopiere den til /tmp.
+SOURCE_DB_PATH = Path(__file__).parent / "exports" / "tei_snippets_clean.db"
 
-import shutil
-
-# Absolutt filsti basert på plasseringen til index.py
-SOURCE_DB_PATH = Path(__file__).parent / "exports" / "tei_snippets.db"
-DB_PATH = Path("/tmp/tei_snippets.db")
-
-class BackendState:
-    backend: LocalNgramBackend | None = None
-
-state = BackendState()
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    if not SOURCE_DB_PATH.exists():
-        print(f"Advarsel: Database {SOURCE_DB_PATH} ble ikke funnet.")
-        yield
-        return
-        
-    if not DB_PATH.exists():
-        print(f"Kopierer database til /tmp for skrivetilgang...")
-        shutil.copy2(SOURCE_DB_PATH, DB_PATH)
-        
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        rows = conn.execute("SELECT text FROM snippets WHERE text IS NOT NULL AND text != ''").fetchall()
-        texts = [str(row[0]) for row in rows]
-    finally:
-        conn.close()
-        
-    print(f"Bygger N-gram bakgrunnsmodell med {len(texts)} tekster...")
-    state.backend = LocalNgramBackend(texts=texts, n_max=6)
-    print("N-gram modell er klar!")
-    yield
-    state.backend = None
-
-app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -53,173 +20,111 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class AnalyzeRequest(BaseModel):
-    text: str
-    n_min: int = 2
-    n_max: int = 6
-    threshold: float = 14.0
-    top_k: int = 100
-
-@app.post("/api/analyze")
-def analyze_endpoint(req: AnalyzeRequest):
-    if not state.backend:
-        raise HTTPException(status_code=500, detail="Backend er ikke initialisert")
-        
-    config = InfoDensityConfig(
-        n_min=req.n_min,
-        n_max=req.n_max,
-        threshold=req.threshold,
-        top_k=req.top_k
-    )
-    
-    scores, histogram = analyze_text(text=req.text, backend=state.backend, config=config)
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        candidates = []
-        for score in scores:
-            ibsen_match = None
-            if score.count_background > 0:
-                res = None
-                try:
-                    # Clean up phrase for FTS5 (escape double quotes just in case)
-                    safe_phrase = score.phrase.replace('"', '""')
-                    query = f'"{safe_phrase}"'
-                    res = conn.execute(
-                        "SELECT s.source_file, s.text FROM snippets s "
-                        "JOIN snippets_fts f ON s.snippet_id = f.snippet_id "
-                        "WHERE f.text MATCH ? LIMIT 1",
-                        (query,)
-                    ).fetchone()
-                except Exception as e:
-                    print(f"FTS5 feil for phrase '{score.phrase}': {e}")
-                    
-                # Robust fallback med LIKE hvis FTS5 (avhengig av Linux-miljø) ikke fant noe
-                # (spesielt for særnorske tegn som ø/æ/å som noen tokenizere sliter med)
-                if not res:
-                    try:
-                        res = conn.execute(
-                            "SELECT source_file, text FROM snippets "
-                            "WHERE text LIKE ? LIMIT 1",
-                            (f"%{score.phrase}%",)
-                        ).fetchone()
-                    except Exception as e:
-                        print(f"LIKE feil for phrase '{score.phrase}': {e}")
-                
-                if res:
-                    source = res[0].split('/')[-1].replace('.xml', '') if res[0] else "Ukjent kilde"
-                    ibsen_match = f"{source}: {res[1]}"
-
-            candidates.append({
-                "phrase": score.phrase,
-                "n": score.n,
-                "I_score": round(score.info_score, 3),
-                "background_count": score.count_background,
-                "occurrences_in_selection": score.occurrences_in_selection,
-                "sample_sentence": score.sample_sentence,
-                "ibsen_match": ibsen_match,
-            })
-    finally:
-        conn.close()
-        
-    return {
-        "candidates": candidates,
-        "histogram": histogram
-    }
-
-
 class AnalyzeSourceRequest(BaseModel):
     work_id: str = "Terje Vigen"
-    n_min: int = 2
-    n_max: int = 6
-    threshold: float = 14.0
     top_k: int = 100
-
-import re
-import html
 
 @app.get("/api/source-works")
 def get_source_works():
+    """Henter alle unike verk som har data i SQLite-basen, gruppert på sjanger."""
+    if not SOURCE_DB_PATH.exists():
+        return {"grouped_works": {"Dikt": ["Terje Vigen"]}}
+        
+    conn = sqlite3.connect(SOURCE_DB_PATH)
     try:
-        import urllib.request
-        url = "https://raw.githubusercontent.com/Yoonsen/ibsen-prosjekt/main/Ibsen-xml/Dikt/Diktht.xml"
-        with urllib.request.urlopen(url) as response:
-            text = response.read().decode("utf-8")
+        # Finn alle unike titler og sjangere som vi har snippets for
+        rows = conn.execute("""
+            SELECT DISTINCT s.genre, s.title 
+            FROM snippets s
+            JOIN snippets_surprisal ss ON s.snippet_id = ss.snippet_id
+            WHERE s.title IS NOT NULL AND s.title != ''
+            ORDER BY s.genre, s.title
+        """).fetchall()
+        
+        grouped = {}
+        for genre, title in rows:
+            if genre not in grouped:
+                grouped[genre] = []
+            grouped[genre].append(title)
+            
+        works = grouped
     except Exception as e:
-        return {"works": []}
-    poems = re.split(r'<div[^>]*type="poem"[^>]*>', text)
-    
-    works = []
-    for p in poems[1:]:
-        m = re.search(r'<head[^>]*>(.*?)</head>', p, re.DOTALL)
-        if m:
-            head_html = m.group(1)
-            title = html.unescape(re.sub(r'<[^>]+>', '', head_html)).strip()
-            if title and title not in works:
-                works.append(title)
-                
-    return {"works": works}
+        print(f"Feil ved henting av verk: {e}")
+        works = {"Dikt": ["Terje Vigen"]}
+    finally:
+        conn.close()
+        
+    return {"grouped_works": works}
+
 
 @app.post("/api/analyze-source")
 def analyze_source_endpoint(req: AnalyzeSourceRequest):
-    if not state.backend:
-        raise HTTPException(status_code=500, detail="Backend er ikke initialisert")
+    if not SOURCE_DB_PATH.exists():
+        raise HTTPException(status_code=500, detail="Database ikke funnet. Har du lastet ned tei_snippets_clean.db fra Colab?")
         
+    conn = sqlite3.connect(SOURCE_DB_PATH)
     try:
-        import urllib.request
-        url = "https://raw.githubusercontent.com/Yoonsen/ibsen-prosjekt/main/Ibsen-xml/Dikt/Diktht.xml"
-        with urllib.request.urlopen(url) as response:
-            text = response.read().decode("utf-8")
-    except Exception as e:
-        raise HTTPException(status_code=404, detail="Kunne ikke laste ned XML")
-    poems = re.split(r'<div[^>]*type="poem"[^>]*>', text)
-    
-    terje_poem = None
-    for p in poems:
-        if req.work_id in p[:1000]:
-            terje_poem = p
-            break
+        search_term = f"%{req.work_id}%"
+        
+        # Hent de mest overraskende frasene for det valgte verket
+        # Vi gjør et lynraskt JOIN mellom tekstsnuttene og LLM-logitene
+        query = """
+            SELECT ss.phrase, ss.surprisal_score, s.text, s.snippet_id
+            FROM snippets_surprisal ss
+            JOIN snippets s ON ss.snippet_id = s.snippet_id
+            WHERE s.title LIKE ? OR s.doc_id LIKE ? OR s.source_file LIKE ?
+            ORDER BY ss.surprisal_score DESC
+            LIMIT ?
+        """
+        rows = conn.execute(query, (search_term, search_term, search_term, req.top_k)).fetchall()
+        
+        candidates = []
+        for row in rows:
+            candidates.append({
+                "phrase": row[0],
+                "I_score": row[1], # Beholder feltnavnet 'I_score' så frontend slipper endring
+                "sample_sentence": row[2],
+                "snippet_id": row[3],
+                "background_count": 0, 
+                "occurrences_in_selection": 1,
+            })
             
-    if not terje_poem:
-        raise HTTPException(status_code=404, detail=f"Diktet {req.work_id} ikke funnet i XML")
+        # For å unngå å sende 600+ KB med brevtekst til frontend (som får nettleseren til å krasje 
+        # når React prøver å regex-markere alt), bygger vi bare teksten fra de unike snuttene som har gullkorn!
+        text_blocks = []
+        for row in rows:
+            if row[2] and row[2] not in text_blocks:
+                text_blocks.append(row[2])
+                
+        full_extracted_text = "\n\n[...]\n\n".join(text_blocks)
         
-    p = re.sub(r'<pb[^>]*/>', '', terje_poem)
-    p = re.sub(r'<anchor[^>]*/>', '', p)
-    p = re.sub(r'<ptr[^>]*/>', '', p)
-    
-    stanzas = re.findall(r'<HIS:hisLg[^>]*>(.*?)</HIS:hisLg>', p, re.DOTALL)
-    if not stanzas:
-        stanzas = re.findall(r'<lg[^>]*>(.*?)</lg>', p, re.DOTALL)
+    finally:
+        conn.close()
         
-    extracted_text_blocks = []
-    for stanza in stanzas:
-        lines = re.findall(r'<l[^>]*>(.*?)</l>', stanza, re.DOTALL)
-        clean_lines = [html.unescape(re.sub(r'<[^>]+>', '', l).strip()) for l in lines]
-        extracted_text_blocks.append("\n".join(clean_lines))
-        
-    full_extracted_text = "\n\n".join(extracted_text_blocks)
-    
-    config = InfoDensityConfig(
-        n_min=req.n_min,
-        n_max=req.n_max,
-        threshold=req.threshold,
-        top_k=req.top_k
-    )
-    
-    scores, histogram = analyze_text(text=full_extracted_text, backend=state.backend, config=config)
-    
-    candidates = []
-    for score in scores:
-        candidates.append({
-            "phrase": score.phrase,
-            "n": score.n,
-            "I_score": round(score.info_score, 3),
-            "background_count": score.count_background,
-            "occurrences_in_selection": score.occurrences_in_selection,
-            "sample_sentence": score.sample_sentence
-        })
+    if not candidates:
+        raise HTTPException(status_code=404, detail=f"Ingen LLM-analyserte fraser funnet for {req.work_id}")
         
     return {
         "text": full_extracted_text,
         "candidates": candidates,
-        "histogram": histogram
+        "histogram": {} # Fases ut
+    }
+
+class AnalyzeRequest(BaseModel):
+    text: str
+    top_k: int = 100
+
+@app.post("/api/analyze")
+def analyze_endpoint(req: AnalyzeRequest):
+    # Siden vi nå bruker pre-komputerte LLM-logits (Surprisal), 
+    # støtter vi ikke lenger å lime inn ukjente tekster live i Vercel
+    # (det ville krevd at Vercel kjørte Gemma 2B on-the-fly).
+    return {
+        "candidates": [{
+            "phrase": "Fritekstanalyse er deaktivert, da modellen nå kjører lokalt via Colab.",
+            "I_score": 99.9,
+            "sample_sentence": req.text,
+            "snippet_id": "info"
+        }],
+        "histogram": {}
     }

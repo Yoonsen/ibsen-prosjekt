@@ -110,8 +110,8 @@ export default function Kildeanalyse() {
 
   const [debugLogs, setDebugLogs] = useState<string[]>([]);
   const addLog = (msg: string) => setDebugLogs(prev => [...prev, msg]);
-  const [workId, setWorkId] = useState("Terje Vigen");
-  const [availableWorks, setAvailableWorks] = useState<string[]>([]);
+  const [workId, setWorkId] = useState("");
+  const [groupedWorks, setGroupedWorks] = useState<Record<string, string[]>>({});
   const [nMin, setNMin] = useState(2);
   const [nMax, setNMax] = useState(6);
   const [threshold, setThreshold] = useState(14.0);
@@ -119,6 +119,10 @@ export default function Kildeanalyse() {
   const listRef = useRef<HTMLDivElement>(null);
 
   const handleAnalyze = async () => {
+    if (!workId) {
+      addLog("Ingen verk valgt. Avbryter analyse.");
+      return;
+    }
     setLoading(true);
     setActiveCandidate(null);
     addLog(`Starter POST /api/analyze-source for workId: ${workId}...`);
@@ -161,18 +165,18 @@ export default function Kildeanalyse() {
       addLog(`GET /api/source-works -> Status: ${res.status}. Body: ${text.slice(0, 150)}`);
       try {
          const data = JSON.parse(text);
-         setAvailableWorks(data.works || []);
+         if (data.grouped_works) {
+           setGroupedWorks(data.grouped_works);
+         } else if (data.works) {
+           setGroupedWorks({ "Alle verk": data.works });
+         }
       } catch (e) {
          addLog(`Feil ved parsing av /api/source-works: ${e}`);
       }
     }).catch(err => addLog(`Nettverksfeil /api/source-works: ${err}`));
   }, []);
 
-  // Hent initielt
-  useEffect(() => {
-    handleAnalyze();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
 
   const handlePoemPhraseClick = (c: Candidate | null) => {
     setActiveCandidate(c);
@@ -206,9 +210,14 @@ export default function Kildeanalyse() {
             <p className="text-gray-500 mt-2 text-lg">Trekke ut allusjonsverdige fraser fra originalverk for Elastic-søk.</p>
           </div>
           <div className="flex gap-2">
-                         <select value={workId} onChange={e => setWorkId(e.target.value)} className="p-2 border rounded-lg text-sm bg-white">
-               {availableWorks.map(w => <option key={w} value={w}>{w}</option>)}
-             </select>
+              <select value={workId} onChange={e => setWorkId(e.target.value)} className="p-2 border rounded-lg text-sm bg-white">
+               <option value="" disabled>Velg verk...</option>
+               {Object.entries(groupedWorks).map(([genre, works]) => (
+                 <optgroup key={genre} label={`— ${genre} —`}>
+                   {works.map(w => <option key={w} value={w}>{w}</option>)}
+                 </optgroup>
+               ))}
+              </select>
              <button onClick={handleAnalyze} className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-bold">Oppdater</button>
           </div>
         </header>
